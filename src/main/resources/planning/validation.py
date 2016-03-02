@@ -1,7 +1,13 @@
+#
+# THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR 
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS 
+# FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+#
+
 from java.util import HashSet
 
 #Grab all deployables
-def deployables():
+def unique_deployables():
     result = HashSet()
     for delta in deltas.deltas:
         deployed = delta.deployedOrPrevious
@@ -10,10 +16,10 @@ def deployables():
     return result
         
 #Create a before validation step for each deployable artifact
-for deployable in deployables():
+for deployable in unique_deployables():
     context.addStep(steps.jython(
         description="Validate checksum of %s" % deployable.name,
-        order=15,
+        order=0,
         script="scripts/validation/before_validation.py",
         jython_context={'deployable': deployable})
     )
@@ -31,7 +37,7 @@ for delta in deltas.deltas:
         
         context.addStep(steps.os_script(
             description="Validate checksum of %s for %s on %s" % (deployable.name, container.name, container.host.name),
-            order=75,
+            order=0,
             script="scripts/validation/after_validation",
             freemarker_context={'checksum': checksum, 'deployedFileName': deployed.file.name, 'containerHome': container.home},
             target_host=container.host)
