@@ -1,4 +1,4 @@
-# xld-adv-checksum-plugin
+# xld-checksum-validation-plugin
 
 !EXTREMELY ALPHA PLUGIN!
 
