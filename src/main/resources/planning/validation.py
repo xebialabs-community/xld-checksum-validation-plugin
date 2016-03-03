@@ -6,17 +6,23 @@
 
 from java.util import HashSet
 
+supported_types = ['file.File', 'file.Folder', 'file.Archive']
+
 # Grab all deployables
-def unique_deployables():
+def unique_supported_deployables():
     result = HashSet()
     for delta in deltas.deltas:
         deployed = delta.deployedOrPrevious
-        if delta.operation == "CREATE" or delta.operation == "MODIFY":
+
+        is_supported_type = str(deployed.deployable.type) in supported_types
+        is_supported_operation = delta.operation == "CREATE" or delta.operation == "MODIFY"
+
+        if is_supported_type and is_supported_operation:
             result.add(deployed.deployable)
     return result
         
 # Create a before validation step for each deployable artifact
-for deployable in unique_deployables():
+for deployable in unique_supported_deployables():
     context.addStep(steps.jython(
         description="Validate checksum of %s" % deployable.name,
         order=0,
