@@ -6,18 +6,17 @@
 
 from java.util import HashSet
 
-supported_types = ['file.File', 'file.Folder', 'file.Archive']
-
 # Grab all deployables
 def unique_supported_deployables():
     result = HashSet()
     for delta in deltas.deltas:
         deployed = delta.deployedOrPrevious
 
-        is_supported_type = str(deployed.deployable.type) in supported_types
+
+        has_checksum = hasattr(deployed.deployable, "checksum")
         is_supported_operation = delta.operation == "CREATE" or delta.operation == "MODIFY"
 
-        if is_supported_type and is_supported_operation:
+        if has_checksum and is_supported_operation:
             result.add(deployed.deployable)
     return result
         

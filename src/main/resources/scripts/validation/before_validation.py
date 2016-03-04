@@ -15,15 +15,15 @@ def sha1OfFile(filepath):
 checksum = str(deployable["checksum"])
 deployable_file = deployable.file
 deployable_file_location = deployable_file.path
-calculated_checksum = str(sha1OfFile(deployable_file_location)
+calculated_checksum = str(sha1OfFile(deployable_file_location))
 
-print 'Deployable Checksum: %s' % checksum
+print "Deployable Checksum: %s" % checksum
 # Calculate checksum on the filesystem
-print 'Calculated Checksum: %s' % calculated_checksum
+print "Calculated Checksum: %s" % calculated_checksum
 
 if (checksum == calculated_checksum):
-    print 'Checksum match!'
+    print "Checksum match!"
 else:
-    print 'Checksum mismatch!'
+    print "Checksum mismatch!
     # Throw an exception in order to stop the deployment
     raise ValueError('Checksum mismatch!')
