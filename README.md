@@ -7,3 +7,12 @@ Drop the built plugin (a JAR file) into the \<XLD_SERVER\>/plugins directory.
 
 # Usage
 For all deployable types that have a checksum property, a new step will appear at the beginning of the deployment plan. During execution of this step, it is verified that the underlying binary (a file or archive) has not changed since initial import into XLD.
+
+## Example of deployment plan
+![Preview](/docs/img/preview.png)
+
+## Example of success
+![Success](/docs/img/success.png)
+
+## Example of failure
+![Failure](/docs/img/failure.png)
