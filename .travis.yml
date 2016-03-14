@@ -5,7 +5,6 @@ deploy:
   api_key:
     secure: lqYapUIDl97hUlLmfQm/E55d/XxeHQeO36cmuACrdOvu8Mto4N3tH2foEgGeqVV4sku7nI4nSKrSeCdIRZd5JRIjaGPMb+39eSqPbw+vNOLG5R/ddkgqDC4M5Vv2qTTrA2PhL1vEeubdA5AAygAxwT71XDmRNLxoNiw7/zDwKqnCOZRCxS5fEw/PUm36S4VpqcAJGad60HXjQPIv0j5jizNqHRV5+/3riC6yU1mX/8tn494j0kspA4ajbAPcvdbQRSOU31MuXvn8kksEsmOLm9TrQm3J7rOqZyZvl3zkJHl8isc14YB4tcGMVyhKu6GetBOuSAoXS5U5EYdyklM7PO+vjhAuMtMszSjFAddXVW+5Ih9ZXJVg2JMmPOtYiRa6nxSe51v9BuXT3XjKYrVi8bnjllFE2It4wLDfsRe+K1OZzPT/02vy4oKTtw6TCHTfb3tkWCeegRXUeSTlUDSTiQVqViWEcRqfgXyBKADH4suJ4ZidPTn1Wpuz+nZ0l7HFsXzyqcR03OqMMVqmBwoHvzrERQYBSuWI8wskGaOuF6ISEWEUD+WmRdlB4/duggFEvOGusH+ZlQonx7putzOAY8B2zRp3TKgDYWF2AvhkOTeYzbkLhYvChScce6wSpfU4hw/Rdhas9/ECkrEVLzIYboO1ZVEGV1MWUyTdnw2hfNw=
 file: build/libs/xld-checksum-validation-plugin-1.0.0.jar
-  skip_cleanup: true
   on:
     all_branches: true
     tags: true
