@@ -12,7 +12,6 @@ def unique_supported_deployables():
     for delta in deltas.deltas:
         deployed = delta.deployedOrPrevious
 
-
         has_checksum = hasattr(deployed.deployable, "checksum")
         is_supported_operation = delta.operation == "CREATE" or delta.operation == "MODIFY"
 
