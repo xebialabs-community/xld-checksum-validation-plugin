@@ -10,7 +10,7 @@ import os
 def sha1OfFile(filepath):
     import hashlib
     # Read in as binary mode to match XLD
-    with open(filepath, 'rb') as f:
+    with open(filepath, "rb") as f:
         return hashlib.sha1(f.read()).hexdigest()
 
 # Grab the checksum and filepath of a deployable artifact
@@ -18,20 +18,10 @@ checksum = str(deployable["checksum"])
 deployable_file = deployable.file
 deployable_file_location = deployable_file.path
 
-calculated_checksum = None
 if os.path.isdir(deployable_file_location):
-  # We've got a file.Folder on our hands
-  task_work_dir = os.path.normpath(deployable_file_location + "/../../")
-  deployable_name = os.path.basename(deployable_file_location)
+  raise ValueError("Underlying type is file.Folder, which is not supported at the moment!")
 
-  print "Going to look in %s for the original zip file" % task_work_dir
-  for directory, dirnames, filenames in os.walk(task_work_dir):
-    # run here your code
-    if deployable_name in filenames:
-      print "Found %s in directory %s" % (deployable_name, directory)
-      calculated_checksum = sha1OfFile(directory + "/" + deployable_name)
-else:
-  calculated_checksum = sha1OfFile(deployable_file_location)
+calculated_checksum = sha1OfFile(deployable_file_location)
 
 print "Deployable Checksum: %s" % checksum
 # Calculate checksum on the filesystem
@@ -40,6 +30,6 @@ print "Calculated Checksum: %s" % calculated_checksum
 if (checksum == calculated_checksum):
     print "Checksum match!"
 else:
-    print "Checksum mismatch!
+    print "Checksum mismatch!"
     # Throw an exception in order to stop the deployment
-    raise ValueError('Checksum mismatch!')
+    raise ValueError("Checksum mismatch!")
