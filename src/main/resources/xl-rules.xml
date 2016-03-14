@@ -12,7 +12,7 @@
 	checksum_validation plans the checksum validation steps before and after artifact transfer 
 	-->
 	<rule name="checksum_validation" scope="plan">
-        <planning-script-path>planning/validation.py</planning-script-path>
+		<planning-script-path>planning/validation.py</planning-script-path>
 	</rule>
 
 </rules>
