@@ -4,6 +4,8 @@
 # FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
 #
 
+import os
+
 # Grab the SHA1 hash of filepath
 def sha1OfFile(filepath):
     import hashlib
@@ -15,7 +17,21 @@ def sha1OfFile(filepath):
 checksum = str(deployable["checksum"])
 deployable_file = deployable.file
 deployable_file_location = deployable_file.path
-calculated_checksum = str(sha1OfFile(deployable_file_location))
+
+calculated_checksum = None
+if os.path.isdir(deployable_file_location):
+  # We've got a file.Folder on our hands
+  task_work_dir = os.path.normpath(deployable_file_location + "/../../")
+  deployable_name = os.path.basename(deployable_file_location)
+
+  print "Going to look in %s for the original zip file" % task_work_dir
+  for directory, dirnames, filenames in os.walk(task_work_dir):
+    # run here your code
+    if deployable_name in filenames:
+      print "Found %s in directory %s" % (deployable_name, directory)
+      calculated_checksum = sha1OfFile(directory + "/" + deployable_name)
+else:
+  calculated_checksum = sha1OfFile(deployable_file_location)
 
 print "Deployable Checksum: %s" % checksum
 # Calculate checksum on the filesystem
