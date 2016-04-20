@@ -22,14 +22,14 @@ import org.slf4j.{Logger, LoggerFactory}
 import scala.util.Try
 
 object HttpEtagArtifactResolver {
-  val Protocols = Array("checksum-http", "etag-https")
+  val Protocols = Array("checksum-http", "checksum-https")
 
   private[http] val ContentDispositionHeader = "Content-Disposition"
 
   private[http] val ContentDispositionFileName = """.*;[ ]*filename="?([^;^"]*)"?.*""".r
 }
 
-@Resolver(protocols = Array("etag-http", "etag-https"))
+@Resolver(protocols = Array("checksum-http", "checksum-https"))
 class HttpEtagArtifactResolver extends ArtifactResolver {
   private val logger: Logger  = LoggerFactory.getLogger(HttpEtagArtifactResolver.getClass);
 
@@ -39,7 +39,7 @@ class HttpEtagArtifactResolver extends ArtifactResolver {
 
     private var fileName: Option[String] = None
 
-    private val httpFileUri: String = artifact.getFileUri.stripPrefix("etag-")
+    private val httpFileUri: String = artifact.getFileUri.stripPrefix("checksum-")
 
     private var openConnections: Seq[GetMethod] = Seq()
 
@@ -94,11 +94,11 @@ class HttpEtagArtifactResolver extends ArtifactResolver {
               val expectedChecksum: Option[String] = Option(artifact.getChecksum)
               val actualChecksum: String = Hex.encodeHexString(getMessageDigest.digest)
 
-              logger.info(s"Remote artifact ${artifact.getFileUri}, expected checksum ${expectedChecksum}, actual ${actualChecksum}.")
+              logger.info(s"Remote artifact ${artifact.getFileUri}, expected checksum ${expectedChecksum.get}, actual ${actualChecksum}.")
 
               if (expectedChecksum.isEmpty || expectedChecksum.get.isEmpty) {
                 artifact.setProperty(CHECKSUM_PROPERTY_NAME, actualChecksum)
-              } else if (!actualChecksum.equals(expectedChecksum)) {
+              } else if (!actualChecksum.equals(expectedChecksum.get)) {
                 throw new RuntimeException(s"Remote artifact was modified since last import at location ${artifact.getFileUri}, expected checksum ${expectedChecksum} but was ${actualChecksum}.")
               }
             }
