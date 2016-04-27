@@ -83,11 +83,15 @@ class HttpEtagArtifactResolver extends ArtifactResolver {
             override def read(b: Array[Byte], off: Int, len: Int): Int = {
               val numberOfBytesRead: Int = super.read(b, off, len)
 
-              if (numberOfBytesRead == -1) {
+              if (isStreamDepleted(len, numberOfBytesRead)) {
                 validateOrSetChecksum
               }
 
               numberOfBytesRead
+            }
+
+            def isStreamDepleted(len: Int, numberOfBytesRead: Int): Boolean = {
+              numberOfBytesRead == -1 || numberOfBytesRead < len
             }
 
             def validateOrSetChecksum: Unit = {
