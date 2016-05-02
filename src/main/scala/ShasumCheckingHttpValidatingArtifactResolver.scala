@@ -98,7 +98,7 @@ class ShasumCheckingHttpArtifactResolver extends ArtifactResolver {
               val expectedChecksum: Option[String] = Option(artifact.getChecksum)
               val actualChecksum: String = Hex.encodeHexString(getMessageDigest.digest)
 
-              logger.info(s"Remote artifact ${artifact.getFileUri}, expected checksum ${expectedChecksum.get}, actual ${actualChecksum}.")
+              logger.info(s"Remote artifact ${artifact.getFileUri}, expected checksum ${expectedChecksum.orNull}, actual ${actualChecksum}.")
 
               if (expectedChecksum.isEmpty || expectedChecksum.get.isEmpty) {
                 artifact.setProperty(CHECKSUM_PROPERTY_NAME, actualChecksum)
