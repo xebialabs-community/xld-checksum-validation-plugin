@@ -21,7 +21,7 @@ import org.slf4j.{Logger, LoggerFactory}
 
 import scala.util.Try
 
-object HttpEtagArtifactResolver {
+object ShasumChecksumHttpArtifactResolver {
   val Protocols = Array("checksum-http", "checksum-https")
 
   private[http] val ContentDispositionHeader = "Content-Disposition"
@@ -30,10 +30,10 @@ object HttpEtagArtifactResolver {
 }
 
 @Resolver(protocols = Array("checksum-http", "checksum-https"))
-class HttpEtagArtifactResolver extends ArtifactResolver {
-  private val logger: Logger  = LoggerFactory.getLogger(HttpEtagArtifactResolver.getClass);
+class ShasumChecksumHttpArtifactResolver extends ArtifactResolver {
+  private val logger: Logger  = LoggerFactory.getLogger(ShasumChecksumHttpArtifactResolver.getClass);
 
-  import com.xebialabs.xlplatform.artifact.resolution.http.HttpEtagArtifactResolver._
+  import com.xebialabs.xlplatform.artifact.resolution.http.ShasumChecksumHttpArtifactResolver._
 
   override def resolveLocation(artifact: SourceArtifact): ResolvedArtifactFile = new ResolvedArtifactFile {
 
