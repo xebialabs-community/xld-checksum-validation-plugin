@@ -91,7 +91,7 @@ class ShasumCheckingHttpArtifactResolver extends ArtifactResolver {
             }
 
             def isStreamDepleted(len: Int, numberOfBytesRead: Int): Boolean = {
-              numberOfBytesRead == -1 || numberOfBytesRead < len
+              numberOfBytesRead == -1
             }
 
             def validateOrSetChecksum: Unit = {
