@@ -37,5 +37,5 @@ dependencies {
 
 license {
     header rootProject.file('src/main/license/xebialabs_community.license')
-    strictCheck true
+    strictCheck false
 }
