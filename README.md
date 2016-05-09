@@ -7,7 +7,7 @@
 # Description
 This plugins adds a custom resolver that verifies that the checksum of the deployables in a deployment package have not changed since they have been imported into XL Deploy. This is specifically for deployables that have the binary stored on a third party location (Nexus, Artifactory, HTTP server). This builds an extra layer of confidence that the right file is being deployed. Note that tools like Nexus and Artifactory already take care of this requirements, so this plugin should mainly be used if you download binaries from untrusted locations.
 
-This plugin overrides the default checksum functionality and populates the checksum property with the sha1 sum of the artifact exposed by the HTTP server.
+This plugin overrides the default checksum functionality and populates the checksum property with the sha1 sum of the artifact exposed by the HTTP server. If you explicit set checksums on artifacts that are downloaded using this protocol, your deployment will fail. So when using 'checksum-http' urls, you should never override the checksum property.
 
 # Installation
 Drop the built plugin (a JAR file) into the \<XLD_SERVER\>/plugins directory. You can download released version from the 'releases' tab on Github.
