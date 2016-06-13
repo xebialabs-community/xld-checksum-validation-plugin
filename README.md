@@ -9,6 +9,9 @@ This plugins adds a custom resolver that verifies that the checksum of the deplo
 
 This plugin overrides the default checksum functionality and populates the checksum property with the sha1 sum of the artifact exposed by the HTTP server. If you explicit set checksums on artifacts that are downloaded using this protocol, your deployment will fail. So when using 'checksum-http' urls, you should never override the checksum property.
 
+# Build instructions
+Run ```./gradlew clean build ``` in the directory where you cloned this project. You'll find the built JAR in the ```build/libs``` subdir.
+
 # Installation
 Drop the built plugin (a JAR file) into the \<XLD_SERVER\>/plugins directory. You can download released version from the 'releases' tab on Github.
 
