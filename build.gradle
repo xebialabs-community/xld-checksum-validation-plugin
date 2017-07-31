@@ -19,10 +19,6 @@ repositories {
     mavenCentral()
     maven {
         url 'https://dist.xebialabs.com/public/maven2'
-        credentials {
-            username 'download'
-            password 'wVyNZ3dsWwECn/R0kagG'
-        }
     }
 }
 
